@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MarkBot — IA MarkTech Angola (Visual)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b1220;
+      --panel:#0f1a2d;
+      --panel-2:#0c1631;
+      --text:#e6f0ff;
+      --muted:#9bb0d1;
+      --brand:#00d3ff;
+      --brand-2:#5ae1ff;
+      --success:#18e06f;
+      --danger:#ff5c80;
+      --shadow:0 20px 50px rgba(0,0,0,.45);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; background:radial-gradient(1200px 800px at 80% -10%, rgba(0,211,255,.08), transparent),
+               radial-gradient(1000px 700px at -10% 110%, rgba(90,225,255,.06), transparent),
+               var(--bg);
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text); line-height:1.45; overflow-x:hidden;
+    }
+    .topbar{
+      position:sticky; top:0; z-index:10; backdrop-filter:saturate(140%) blur(10px);
+      background:linear-gradient( to right, rgba(15,26,45,.7), rgba(12,22,49,.5) );
+      border-bottom:1px solid rgba(90,225,255,.15);
+    }
+    .topbar .wrap{
+      max-width:1100px; margin:0 auto; padding:14px 20px; display:flex; align-items:center; gap:14px;
+    }
+    .logo{ display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.2px; }
+    .logo .badge{ width:28px; height:28px; border-radius:8px; background:radial-gradient(circle at 30% 30%, var(--brand-2), var(--brand) 60%, #0af 100%);
+      box-shadow:0 0 0 2px rgba(0,211,255,.25), 0 0 24px rgba(0,211,255,.35) inset; }
+    .logo span{font-size:14px; color:var(--text)}
+    .pill{
+      margin-left:auto; padding:6px 10px; border-radius:999px; font-size:12px; color:var(--brand);
+      background:rgba(0,211,255,.08); border:1px solid rgba(0,211,255,.25);
+    }
+    .hero{ max-width:1100px; margin:40px auto; padding:0 20px; display:grid; grid-template-columns:1.2fr .8fr; gap:24px; }
+    .card{
+      background:linear-gradient(180deg, rgba(21,32,54,.7), rgba(12,22,49,.8));
+      border:1px solid rgba(0,211,255,.14); border-radius:var(--radius); box-shadow:var(--shadow);
+    }
+    .card .in{ padding:22px; }
+    .card h1{font-size:28px; line-height:1.15; margin:0 0 10px}
+    .card p{color:var(--muted); margin:0 0 18px}
+    .grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:12px }
+    .tile{
+      background:linear-gradient(180deg, rgba(15,26,45,.7), rgba(15,26,45,.35));
+      border:1px solid rgba(0,211,255,.12); border-radius:14px; padding:14px; min-height:80px;
+    }
+    .tile strong{ display:block; font-size:13px; margin-bottom:6px }
+    .tile span{ color:var(--muted); font-size:12px }
+    .mb-launcher{ position:fixed; right:22px; bottom:22px; z-index:50; }
+    .mb-launcher input{ display:none }
+    .mb-button{ display:flex; align-items:center; gap:10px; cursor:pointer; padding:12px 16px; border-radius:999px;
+      background:radial-gradient(120% 160% at 20% 20%, #0af, var(--brand) 60%, #39e7ff);
+      color:#04131b; font-weight:700; border:1px solid rgba(255,255,255,.15);
+      box-shadow:0 10px 30px rgba(0,211,255,.35), inset 0 -4px 16px rgba(4,19,27,.35);
+      transition:transform .15s ease; }
+    .mb-button:hover{ transform:translateY(-2px) }
+    .mb-button .dot{ width:8px; height:8px; background:var(--success); border-radius:50%; box-shadow:0 0 12px rgba(24,224,111,.9) }
+    .mb-panel{
+      position:fixed; right:22px; bottom:22px; width:360px; max-width:calc(100vw - 40px); height:560px;
+      transform:translateY(20px) scale(.96); opacity:0; pointer-events:none;
+      background:linear-gradient(180deg, rgba(12,22,49,.96), rgba(10,18,40,.96));
+      border:1px solid rgba(0,211,255,.2); border-radius:20px; box-shadow:0 30px 80px rgba(0,0,0,.55);
+      transition:opacity .18s ease, transform .18s ease;
+      display:flex; flex-direction:column; overflow:hidden;
+    }
+    .mb-launcher input:checked ~ .mb-panel{ transform:none; opacity:1; pointer-events:auto }
+    .mb-header{
+      padding:14px 16px; display:flex; align-items:center; gap:12px; border-bottom:1px solid rgba(0,211,255,.12);
+      background:linear-gradient(180deg, rgba(21,32,54,.9), rgba(12,22,49,.6));
+    }
+    .mb-logo{ width:34px; height:34px; border-radius:10px; background:radial-gradient(circle at 30% 30%, var(--brand-2), var(--brand) 60%, #0af 100%);
+      box-shadow:0 0 0 2px rgba(0,211,255,.25), inset 0 0 20px rgba(0,211,255,.3); }
+    .mb-title{ display:flex; flex-direction:column; line-height:1.1 }
+    .mb-title b{ font-size:14px }
+    .mb-title small{ color:var(--muted); font-size:12px }
+    .mb-actions{ margin-left:auto; display:flex; gap:8px }
+    .mb-icon{ width:32px; height:32px; display:grid; place-items:center; border-radius:10px; color:var(--text);
+      border:1px solid rgba(0,211,255,.14); background:rgba(255,255,255,.02) }
+    .mb-body{ flex:1; padding:16px; display:flex; flex-direction:column; gap:14px; overflow:auto;
+      scrollbar-width:thin; scrollbar-color: rgba(0,211,255,.35) transparent; }
+    .mb-msg{ max-width:84%; padding:12px 14px; border-radius:14px; font-size:14px; line-height:1.35;
+      border:1px solid rgba(255,255,255,.06) }
+    .mb-msg.bot{ align-self:flex-start; background:linear-gradient(180deg, rgba(20,34,60,.85), rgba(14,26,48,.85)); border-color:rgba(0,211,255,.15) }
+    .mb-msg.user{ align-self:flex-end; background:linear-gradient(180deg, rgba(0,211,255,.15), rgba(0,211,255,.08)); border-color:rgba(0,211,255,.25) }
+    .mb-footer{ padding:12px; border-top:1px solid rgba(0,211,255,.1); display:flex; align-items:center; gap:10px;
+      background:linear-gradient(180deg, rgba(21,32,54,.7), rgba(12,22,49,.7)); }
+    .mb-input input{ width:100%; padding:12px 44px 12px 12px; border-radius:14px;
+      background:rgba(0,211,255,.06); border:1px solid rgba(0,211,255,.22); color:var(--text) }
+    .mb-send{ position:absolute; right:6px; top:50%; transform:translateY(-50%); width:32px; height:32px;
+      border-radius:10px; display:grid; place-items:center; border:1px solid rgba(0,211,255,.25);
+      background:radial-gradient(var(--brand-2), var(--brand)) }
+    @media (max-width: 900px){ .hero{ grid-template-columns:1fr } }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <div class="logo"><div class="badge" aria-hidden="true"></div><span>MarkTech Angola</span></div>
+      <div class="pill">IA • Cibersegurança • Automação</div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <article class="card">
+      <div class="in">
+        <h1>MarkBot — Chat de Automação de Serviços de Marketing</h1>
+        <p>Atendimento imediato, captação de leads, propostas automáticas e agendamentos — tudo num só assistente inteligente com a identidade premium da MarkTech.</p>
+        <div class="grid" aria-hidden="true">
+          <div class="tile"><strong>Atendimento 24/7</strong><span>Respostas rápidas e consistentes.</span></div>
+          <div class="tile"><strong>Captação de Leads</strong><span>Qualificação automática.</span></div>
+          <div class="tile"><strong>Propostas em PDF</strong><span>Modelos prontos e dinâmicos.</span></div>
+        </div>
+      </div>
+    </article>
+    <aside class="card">
+      <div class="in">
+        <h2 style="margin:0 0 10px;font-size:18px">Demonstração Visual</h2>
+        <p class="muted" style="color:var(--muted);margin:0">Abra o chat no canto inferior direito para ver o layout.</p>
+      </div>
+    </aside>
+  </section>
+
+  <!-- CHAT FLOATING WIDGET -->
+  <div class="mb-launcher">
+    <input type="checkbox" id="toggle-chat" />
+    <label class="mb-button" for="toggle-chat"><span class="dot"></span><span>Falar com o MarkBot</span></label>
+
+    <div class="mb-panel">
+      <div class="mb-header">
+        <div class="mb-logo"></div>
+        <div class="mb-title"><b>MarkBot</b><small>IA • MarkTech Angola · <span style="color:var(--success)">● online</span></small></div>
+        <div class="mb-actions"><label class="mb-icon" for="toggle-chat">✕</label></div>
+      </div>
+
+      <div class="mb-body" id="chatBody">
+        <div class="mb-msg bot">Olá! 👋 Sou o <b>MarkBot</b>, o assistente de automação da <b>MarkTech Angola</b>. Em que posso ajudar hoje?</div>
+      </div>
+
+      <!-- FORM COM INTEGRAÇÃO FORMSPREE -->
+      <div class="mb-footer">
+        <form id="chatForm" action="https://formspree.io/f/xovlbwjo" method="POST" style="display:flex; gap:10px; width:100%;">
+          <div class="mb-input" style="flex:1; position:relative;">
+            <input type="text" name="mensagem" placeholder="Escreva a sua mensagem…" required>
+            <button type="submit" class="mb-send">➤</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById("chatForm");
+    const chatBody = document.getElementById("chatBody");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+      let input = form.querySelector("input[name='mensagem']");
+      let msg = input.value.trim();
+      if(msg){
+        let userMsg = document.createElement("div");
+        userMsg.className = "mb-msg user";
+        userMsg.textContent = msg;
+        chatBody.appendChild(userMsg);
+        input.value = "";
+
+        fetch(form.action, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { "Accept": "application/json" }
+        }).then(r=>{
+          let botMsg = document.createElement("div");
+          botMsg.className = "mb-msg bot";
+          botMsg.textContent = "✅ Obrigado! Recebemos a sua mensagem e vamos responder por email.";
+          chatBody.appendChild(botMsg);
+          chatBody.scrollTop = chatBody.scrollHeight;
+        }).catch(()=>{
+          let botMsg = document.createElement("div");
+          botMsg.className = "mb-msg bot";
+          botMsg.textContent = "⚠️ Ops! Não conseguimos enviar. Tente novamente.";
+          chatBody.appendChild(botMsg);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
